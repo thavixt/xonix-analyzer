@@ -1,10 +1,13 @@
 "use strict";
 /**
- * Cut off the insignificant data - the bottom part
- * The offset from the bottom is 8 pixels at 320x200 resolution,
- * or 0.96 as a multiplier for variable sizes
+ * Cut off the insignificant data
+ * The offset from the bottom at 320x200 resolution
  */
-const OFFSET = 0.96 // 8
+const OFFSET_H = 0.915 // 8
+/**
+ * The offset from the right at 320x200 resolution
+ */
+const OFFSET_W = 0.9 // 20
 /**
  * Alert distance between the line and a flying point
  */
@@ -26,14 +29,19 @@ const POINT = [168, 168, 168]
  * (color +- COLOR_RANGE should yield a match)
  */
 const COLOR_RANGE = 80
+/**
+ * Spread range
+ * TODO: explain
+*/
+const SPREAD = 100
 
 class State {
 
 	constructor(/* rawPixels */) {
 		console.time("instance creation")
 		//this.raw = rawPixels
-		this.width = img.width
-		this.height = img.height * OFFSET
+		this.width = img.width * OFFSET_W
+		this.height = img.height * OFFSET_H
 		this.time = new Date().getTime()
 		this.pixels = [] // all pixels of the state
 		this.player = [] // positions of the player
@@ -54,6 +62,7 @@ class State {
 		this.emphasize(this.line, this.walls)
 		this.colorize(this.points, [168, 0, 168, 255])
 		this.colorize(this.line, [0, 0, 255, 255])
+		//this.draw()
 	}
 
     /**
@@ -192,7 +201,7 @@ class State {
 			// Check element against all wall elements
 			arr2.forEach(function (vw, iw, aw) {
 				// Only check each n-th and nw-th elements
-				if (i % 10 > 0 && iw % 10 > 0) return
+				if (i % SPREAD > 0 && iw % SPREAD > 0) return
 				// Check if the distance between the element and the wall
 				// is smaller than the ALERT_RADIUS constant
 				if (dist(vw.x, vw.y, v.x, v.y) < radius) {

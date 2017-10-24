@@ -1,14 +1,15 @@
 "use strict";
 
+const TARGET_FRAMERATE = 10
 /* let presets = [
-    //'/assets/xonix_1.png',
-    '/assets/xonix_3.png',
-    '/assets/xonix_4.png',
-    '/assets/xonix_5.png',
-    '/assets/xonix_6.png',
-    '/assets/xonix_7.png',
-    '/assets/xonix_8.png',
-    //'/assets/noisy.jpg',
+    //'assets/xonix_1.png',
+    'assets/xonix_3.png',
+    'assets/xonix_4.png',
+    'assets/xonix_5.png',
+    'assets/xonix_6.png',
+    'assets/xonix_7.png',
+    'assets/xonix_8.png',
+    //'/ssets/noisy.jpg',
 ] */
 let img,
 	imgs,
@@ -16,13 +17,13 @@ let img,
 
 function preload() {
 	imgs = [
-		loadImage('/assets/xonix_1.png'),
-		loadImage('/assets/xonix_3.png'),
-		loadImage('/assets/xonix_4.png'),
-		loadImage('/assets/xonix_5.png'),
-		loadImage('/assets/xonix_6.png'),
-		loadImage('/assets/xonix_7.png'),
-		loadImage('/assets/xonix_8.png'),
+		loadImage('assets/xonix_1.png'),
+		loadImage('assets/xonix_3.png'),
+		loadImage('assets/xonix_4.png'),
+		loadImage('assets/xonix_5.png'),
+		loadImage('assets/xonix_6.png'),
+		loadImage('assets/xonix_7.png'),
+		loadImage('assets/xonix_8.png'),
 		//loadImage('/assets/noisy.jpg'),
 	]
 	//img = random(imgs)
@@ -36,13 +37,13 @@ function setup() {
 	pixelDensity(1)
 	//createCanvas(img.width, img.height)
 	createCanvas(320, 200)
-	img = createVideo(['/assets/xonix.mp4'])
+	img = createVideo(['assets/xonix.mp4'])
 	console.log('dimensions:', width, height)
 	image(img, 0, 0, img.width, img.height)
 	img.loop()
 	img.loadPixels()
 	// Debug
-	frameRate(5)
+	frameRate(TARGET_FRAMERATE)
 	//noLoop()
 }
 
